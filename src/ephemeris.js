@@ -423,6 +423,8 @@ export function calculateChart(input) {
 
   return {
     name, JD,
+    birthYear: year, birthMonth: month, birthDay: day,
+    birthHour: hour, birthMinute: minute, birthTz: tz,
     timeKnown: input.timeKnown !== false,
     placeKnown: input.placeKnown !== false,
     // Vedic (sidereal)

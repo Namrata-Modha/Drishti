@@ -291,7 +291,7 @@ function Tag({ children, col }) {
   return (
     <span style={{
       background:`${c}18`,border:`1px solid ${c}44`,
-      borderRadius:20,padding:'2px 9px',fontSize:11,
+      borderRadius:20,padding:'2px 9px',fontSize:12,
       color:c,fontFamily:'Georgia,serif',whiteSpace:'nowrap',
     }}>{children}</span>
   );
@@ -306,10 +306,10 @@ function InsightBlock({ title, body, grade, delay=0, accent }) {
       borderRadius:10,padding:'14px 16px',marginBottom:12,
     }}>
       <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:6,gap:8}}>
-        <div style={{color: accent ? G.tealL : G.goldL,fontSize:14,fontWeight:'bold',fontFamily:'Georgia,serif',lineHeight:1.3}}>{title}</div>
+        <div style={{color: accent ? G.tealL : G.goldL,fontSize:16,fontWeight:'bold',fontFamily:'Georgia,serif',lineHeight:1.3}}>{title}</div>
         {grade && <Tag col={c}>{grade}</Tag>}
       </div>
-      <div style={{color:G.text,fontSize:13,lineHeight:1.8}}>{body}</div>
+      <div style={{color:G.text,fontSize:15,lineHeight:1.8}}>{body}</div>
     </div>
   );
 }
@@ -409,12 +409,12 @@ function InputForm({ onSubmit, lang='en' }) {
     outline:'none', fontFamily:'inherit', boxSizing:'border-box',
   };
   const labelRow = { display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:6 };
-  const labelTxt = { fontSize:11, color:G.mid, textTransform:'uppercase', letterSpacing:1 };
+  const labelTxt = { fontSize:12, color:G.mid, textTransform:'uppercase', letterSpacing:1 };
   const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
   const optionalToggle = (on, toggle, label) => (
     <button type="button" onClick={toggle}
-      style={{ fontSize:11, background:'none', border:'none', cursor:'pointer', color: on ? '#FFC832' : G.mid, fontFamily:'inherit', padding:0 }}>
+      style={{ fontSize:12, background:'none', border:'none', cursor:'pointer', color: on ? '#FFC832' : G.mid, fontFamily:'inherit', padding:0 }}>
       {on ? `✓ ${label}` : label}
     </button>
   );
@@ -424,7 +424,7 @@ function InputForm({ onSubmit, lang='en' }) {
       <Starfield />
       <div style={{ position:'relative', zIndex:1, width:'100%', maxWidth:540 }}>
         <div style={{ textAlign:'center', marginBottom:36 }}>
-          <div style={{ fontSize:11, color:G.goldL, textTransform:'uppercase', letterSpacing:4, marginBottom:10 }}>✦ {tx(lang,'brand')} ✦</div>
+          <div style={{ fontSize:12, color:G.goldL, textTransform:'uppercase', letterSpacing:4, marginBottom:10 }}>✦ {tx(lang,'brand')} ✦</div>
           <h1 style={{ fontSize:30, color:G.gold, margin:'0 0 10px', letterSpacing:2, lineHeight:1 }}>{tx(lang,'tagline')}</h1>
           <p style={{ fontSize:14, color:G.mid, margin:0 }}>{tx(lang,'sub')}</p>
         </div>
@@ -475,7 +475,7 @@ function InputForm({ onSubmit, lang='en' }) {
               <div style={{ display:'flex', gap:8 }}>
                 {['city','timezone'].map(m=>(
                   <button key={m} type="button" onClick={()=>setPlaceMode(m)}
-                    style={{ fontSize:10, padding:'3px 10px', border:`1px solid ${placeMode===m?G.gold:G.dim}`, borderRadius:20, background: placeMode===m?`${G.gold}22`:'none', color: placeMode===m?G.gold:G.mid, cursor:'pointer', fontFamily:'inherit' }}>
+                    style={{ fontSize:11, padding:'3px 10px', border:`1px solid ${placeMode===m?G.gold:G.dim}`, borderRadius:20, background: placeMode===m?`${G.gold}22`:'none', color: placeMode===m?G.gold:G.mid, cursor:'pointer', fontFamily:'inherit' }}>
                     {m==='city'?'City':'Timezone only'}
                   </button>
                 ))}
@@ -504,10 +504,10 @@ function InputForm({ onSubmit, lang='en' }) {
                   </div>
                   {form.cityName
                     ? <p style={{ fontSize:12, color:G.teal, marginTop:6 }}>✓ {form.cityName} · Lat {parseFloat(form.lat).toFixed(2)}° · Lon {parseFloat(form.lon).toFixed(2)}° · UTC{parseFloat(form.tz)>=0?'+':''}{form.tz}</p>
-                    : !form.cityQuery && <p style={{ fontSize:11, color:G.mid, marginTop:6 }}>City not in list? Switch to "Timezone only" above.</p>
+                    : !form.cityQuery && <p style={{ fontSize:12, color:G.mid, marginTop:6 }}>City not in list? Switch to "Timezone only" above.</p>
                   }
                   <details style={{ marginTop:8 }}>
-                    <summary style={{ fontSize:11, color:G.mid, cursor:'pointer' }}>Enter coordinates manually</summary>
+                    <summary style={{ fontSize:12, color:G.mid, cursor:'pointer' }}>Enter coordinates manually</summary>
                     <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:8, marginTop:8 }}>
                       <input style={inputStyle} placeholder="Lat" value={form.lat} onChange={e=>upd('lat',e.target.value)} />
                       <input style={inputStyle} placeholder="Lon" value={form.lon} onChange={e=>upd('lon',e.target.value)} />
@@ -519,7 +519,7 @@ function InputForm({ onSubmit, lang='en' }) {
                   <select style={inputStyle} value={selTz.label} onChange={e=>setSelTz(TIMEZONES.find(t=>t.label===e.target.value))}>
                     {TIMEZONES.map((t,i)=><option key={i} value={t.label}>{t.label}</option>)}
                   </select>
-                  <p style={{ fontSize:11, color:G.warn, marginTop:6 }}>
+                  <p style={{ fontSize:12, color:G.warn, marginTop:6 }}>
                     ⚠ Planetary positions will be accurate. Ascendant/houses will be approximate.
                   </p>
                 </>)
@@ -555,11 +555,14 @@ function Header({ chart, mode }) {
     ? `${SIGN_SYM[lIdx]} ${lagna.sign} Ascendant · ☽ Moon in ${moon.sign} · ${moon.nakshatra} Nakshatra`
     : `Ascendant in ${lagna.sign} · ☽ Moon in ${moon.sign}`;
     
-  const dateStr = chart.JD ? new Date((chart.JD - 2440587.5) * 86400000).toLocaleDateString('en-US', {day:'numeric', month:'long', year:'numeric'}) : '';
+  const MONTHS_LONG = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const dateStr = chart.birthYear
+    ? `${chart.birthDay} ${MONTHS_LONG[chart.birthMonth - 1]} ${chart.birthYear}`
+    : '';
 
   return (
     <div style={{textAlign:'center',padding:'26px 0 20px'}}>
-      <div style={{fontSize:10,letterSpacing:4,color:G.mid,textTransform:'uppercase',marginBottom:8}}>{system}</div>
+      <div style={{fontSize:11,letterSpacing:4,color:G.mid,textTransform:'uppercase',marginBottom:8}}>{system}</div>
       <h1 style={{
         fontFamily:'Georgia,serif',fontSize:28,fontWeight:'normal',
         color:ac,margin:'0 0 6px',letterSpacing:5, textTransform:'uppercase',
@@ -595,7 +598,7 @@ function ModeToggle({ mode, setMode }) {
               <div style={{fontSize:15,fontFamily:'Georgia,serif',fontWeight:'bold',marginBottom:2}}>
                 {o.icon} {o.label}
               </div>
-              <div style={{fontSize:10,color: active ? (o.col==='#D4AF37'?G.goldL:G.tealL) : G.dim}}>
+              <div style={{fontSize:11,color: active ? (o.col==='#D4AF37'?G.goldL:G.tealL) : G.dim}}>
                 {o.sub}
               </div>
             </button>
@@ -675,7 +678,7 @@ function KundaliChart({ hov, setHov, chart, mode }) {
             {ps.map(p=>(
               <div key={p.id} style={{color:p.col||G.gold,fontSize:12,marginBottom:2}}>{p.sym} {p.name} · {fmtDeg(p.degree)}</div>
             ))}
-            {!ps.length && <div style={{color:G.dim,fontSize:11}}>Empty house</div>}
+            {!ps.length && <div style={{color:G.dim,fontSize:12}}>Empty house</div>}
           </div>
         );
       })()}
@@ -704,12 +707,12 @@ function PlanetLegend({ chart, mode }) {
             <span style={{color:p.col||G.gold,fontSize:18,textAlign:'center',filter:`drop-shadow(0 0 4px ${p.col||G.gold}88)`}}>{p.sym}</span>
             <div>
               <div style={{color:G.text,fontSize:13,fontWeight:'bold'}}>{p.name}</div>
-              <div style={{color:G.mid,fontSize:10.5}}>
+              <div style={{color:G.mid,fontSize:12}}>
                 {SIGN_SYM[hsi]} {p.sign} {' · H'}{p.house}
                 {mode==='vedic' && p.nakshatra ? ` · ${p.nakshatra}` : ''}
               </div>
             </div>
-            <div style={{color:G.dim,fontSize:11,textAlign:'right',fontFamily:'monospace'}}>{fmtDeg(p.degree)}</div>
+            <div style={{color:G.dim,fontSize:12,textAlign:'right',fontFamily:'monospace'}}>{fmtDeg(p.degree)}</div>
           </div>
         );
       })}
@@ -723,7 +726,7 @@ function TabBar({ tab, setTab, mode }) {
   return (
     <div style={{display:'flex',flexWrap:'wrap',borderBottom:`1px solid ${G.bdr}`,marginBottom:24}}>
       {TABS.map((t,i)=>(
-        <button key={i} className={`${cls}${tab===i?' on':''}`} onClick={()=>setTab(i)} style={{background:'none',border:'none',padding:'9px 13px',fontSize:11.5,color:tab===i?ac:G.mid,cursor:'pointer'}}>{t}</button>
+        <button key={i} className={`${cls}${tab===i?' on':''}`} onClick={()=>setTab(i)} style={{background:'none',border:'none',padding:'9px 13px',fontSize:13,color:tab===i?ac:G.mid,cursor:'pointer'}}>{t}</button>
       ))}
     </div>
   );
@@ -772,26 +775,26 @@ function TabOverview({ chart, mode }) {
       <div style={{display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:10,marginBottom:18}}>
         {metrics.map(m=>(
           <div key={m.l} style={{background:G.ink,border:`1px solid ${G.bdr}`,borderRadius:10,padding:'13px 15px',textAlign:'center'}}>
-            <div style={{color:G.mid,fontSize:10,letterSpacing:1.5,textTransform:'uppercase',marginBottom:5}}>{m.l}</div>
+            <div style={{color:G.mid,fontSize:11,letterSpacing:1.5,textTransform:'uppercase',marginBottom:5}}>{m.l}</div>
             <div style={{color:ac,fontSize:15,fontWeight:'bold',marginBottom:2,fontFamily:'Georgia,serif'}}>{m.v}</div>
-            <div style={{color:G.mid,fontSize:11}}>{m.s}</div>
+            <div style={{color:G.mid,fontSize:12}}>{m.s}</div>
           </div>
         ))}
       </div>
       
       {isW ? (
         <div style={{background:G.ink,border:`1px solid ${G.teal}22`,borderRadius:12,overflow:'hidden',marginBottom:16}}>
-          <div style={{padding:'12px 16px',borderBottom:`1px solid ${G.bdr}`,color:G.teal,fontSize:11,letterSpacing:2,textTransform:'uppercase',fontFamily:'Georgia,serif'}}>Vedic vs Western</div>
+          <div style={{padding:'12px 16px',borderBottom:`1px solid ${G.bdr}`,color:G.teal,fontSize:12,letterSpacing:2,textTransform:'uppercase',fontFamily:'Georgia,serif'}}>Vedic vs Western</div>
           {rows.map((r,i)=>(
             <div key={r.p} style={{display:'grid',gridTemplateColumns:'90px 100px 100px 1fr',gap:10,padding:'10px 14px',borderBottom:`1px solid ${G.bdr}`,background:i%2===0?'transparent':'rgba(91,196,184,0.025)',fontSize:12,alignItems:'center'}}>
-              <div style={{color:G.mid,fontSize:11}}>{r.p}</div><div style={{color:G.gold}}>{r.v}</div><div style={{color:G.teal}}>{r.w}</div><div style={{color:G.mid,lineHeight:1.5}}>{r.n}</div>
+              <div style={{color:G.mid,fontSize:12}}>{r.p}</div><div style={{color:G.gold}}>{r.v}</div><div style={{color:G.teal}}>{r.w}</div><div style={{color:G.mid,lineHeight:1.5}}>{r.n}</div>
             </div>
           ))}
         </div>
       ) : (
         p && (
           <div style={{background:'rgba(212,175,55,0.04)',border:`1px solid ${G.gold}28`,borderRadius:12,padding:16,marginBottom:16}}>
-            <div style={{color:G.gold,fontSize:11,letterSpacing:2,textTransform:'uppercase',marginBottom:14,fontFamily:'Georgia,serif'}}>☽ Hindu / Gujarati Panchang</div>
+            <div style={{color:G.gold,fontSize:12,letterSpacing:2,textTransform:'uppercase',marginBottom:14,fontFamily:'Georgia,serif'}}>☽ Hindu / Gujarati Panchang</div>
             <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:10}}>
               {[
                 { l:'Vikram Samvat',   v:String(p.vs),          s:'Gujarati Year'     },
@@ -804,7 +807,7 @@ function TabOverview({ chart, mode }) {
                 { l:'Lagna',           v:p.lagnaSign,         s:p.lagnaGuj    }
               ].map(it=>(
                 <div key={it.l} style={{textAlign:'center',background:'rgba(0,0,0,0.2)',borderRadius:8,padding:'8px 6px'}}>
-                  <div style={{color:G.dim,fontSize:9,letterSpacing:1,textTransform:'uppercase',marginBottom:3}}>{it.l}</div>
+                  <div style={{color:G.dim,fontSize:11,letterSpacing:1,textTransform:'uppercase',marginBottom:3}}>{it.l}</div>
                   <div style={{color:G.text,fontSize:13,fontFamily:'Georgia,serif',marginBottom:1}}>{it.v}</div>
                   <div style={{color:G.mid,fontSize:10}}>{it.s}</div>
                 </div>
@@ -1082,23 +1085,23 @@ function TabDasha({ chart }) {
         <h3 style={{color:G.gold, margin:'0 0 16px', fontSize:14, textTransform:'uppercase', letterSpacing:1.5, fontFamily:`Georgia, serif`}}>Active Dasha Period</h3>
         <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:12, marginBottom:20}}>
           <div style={{background:'rgba(212,175,55,0.04)', borderRadius:10, padding:16}}>
-            <div style={{fontSize:10, color:G.mid, textTransform:'uppercase', letterSpacing:1, marginBottom:8}}>Mahadasha (Major Period)</div>
+            <div style={{fontSize:11, color:G.mid, textTransform:'uppercase', letterSpacing:1, marginBottom:8}}>Mahadasha (Major Period)</div>
             <div style={{fontSize:22, color:maha.color, marginBottom:4}}>◉ {maha.planet}</div>
             <div style={{fontSize:12, color:G.mid}}>Until {jdToDate(maha.endJD)}</div>
           </div>
           <div style={{background:'rgba(212,175,55,0.04)', borderRadius:10, padding:16}}>
-            <div style={{fontSize:10, color:G.mid, textTransform:'uppercase', letterSpacing:1, marginBottom:8}}>Antardasha (Sub Period)</div>
+            <div style={{fontSize:11, color:G.mid, textTransform:'uppercase', letterSpacing:1, marginBottom:8}}>Antardasha (Sub Period)</div>
             <div style={{fontSize:22, color:antar.color, marginBottom:4}}>◎ {antar.planet}</div>
             <div style={{fontSize:12, color:G.mid}}>Until {jdToDate(antar.endJD)}</div>
           </div>
         </div>
         <div style={{marginBottom:6}}>
-          <div style={{fontSize:11, color:G.mid, marginBottom:6}}>{maha.planet} Mahadasha Progress - {progress.toFixed(1)}%</div>
+          <div style={{fontSize:12, color:G.mid, marginBottom:6}}>{maha.planet} Mahadasha Progress - {progress.toFixed(1)}%</div>
           <div style={{background:'rgba(212,175,55,0.1)', borderRadius:20, height:8, overflow:'hidden'}}>
             <div style={{width:`${progress}%`, height:'100%', background:`linear-gradient(90deg, ${maha.color}, ${antar.color})`, borderRadius:20}} />
           </div>
         </div>
-        <div style={{display:'flex', justifyContent:'space-between', fontSize:11, color:G.mid, marginTop:4}}>
+        <div style={{display:'flex', justifyContent:'space-between', fontSize:12, color:G.mid, marginTop:4}}>
           <span>{jdToDate(maha.startJD)}</span><span>{jdToDate(maha.endJD)}</span>
         </div>
       </div>
@@ -1112,9 +1115,9 @@ function TabDasha({ chart }) {
               <div style={{width:10, height:10, borderRadius:'50%', background: isActive ? a.color : 'rgba(255,255,255,0.15)', flexShrink:0, boxShadow: isActive ? `0 0 8px ${a.color}` : 'none'}} />
               <div style={{flex:1, fontSize:14, color: isActive ? G.text : G.mid, fontWeight: isActive ? 'bold' : 'normal'}}>{a.planet}</div>
               <div style={{fontSize:12, color:G.mid}}>{jdToDate(a.startJD)}</div>
-              <div style={{fontSize:10, color:G.dim}}>→</div>
+              <div style={{fontSize:11, color:G.dim}}>→</div>
               <div style={{fontSize:12, color:G.mid}}>{jdToDate(a.endJD)}</div>
-              {isActive && <div style={{fontSize:10, color:a.color, background:`rgba(${hexToRgb(a.color)},0.1)`, padding:'2px 8px', borderRadius:20, fontWeight:'bold'}}>ACTIVE</div>}
+              {isActive && <div style={{fontSize:11, color:a.color, background:`rgba(${hexToRgb(a.color)},0.1)`, padding:'2px 8px', borderRadius:20, fontWeight:'bold'}}>ACTIVE</div>}
             </div>
           );
         })}
@@ -1155,7 +1158,7 @@ function TabPlanetary({ chart, mode }) {
       <div style={{background:G.card,border:`1px solid ${G.bdr}`,borderRadius:8,padding:'10px 12px'}}>
         <div style={{color:d.col,fontWeight:'bold',marginBottom:4}}>{d.name}</div>
         <div style={{color:G.text,fontSize:12}}>Dignity: {d.label}</div>
-        <div style={{color:G.mid,fontSize:11}}>Score: {d.score}/7</div>
+        <div style={{color:G.mid,fontSize:12}}>Score: {d.score}/7</div>
       </div>
     );
   };
@@ -1167,7 +1170,7 @@ function TabPlanetary({ chart, mode }) {
         <ResponsiveContainer width="100%" height={220}>
           <BarChart data={barData} margin={{top:10, right:10, left:-20, bottom:0}}>
             <CartesianGrid strokeDasharray="3 3" stroke={G.dim} vertical={false}/>
-            <XAxis dataKey="name" tick={{fill:G.mid, fontSize:11}} axisLine={false} tickLine={false}/>
+            <XAxis dataKey="name" tick={{fill:G.mid, fontSize:12}} axisLine={false} tickLine={false}/>
             <YAxis domain={[0,8]} tick={{fill:G.dim, fontSize:10}} axisLine={false} tickLine={false}/>
             <Tooltip content={<CustomTip/>} cursor={{fill:`${G.gold}0a`}}/>
             <Bar dataKey="score" radius={[4,4,0,0]} maxBarSize={32}>
@@ -1175,7 +1178,7 @@ function TabPlanetary({ chart, mode }) {
             </Bar>
           </BarChart>
         </ResponsiveContainer>
-        <p style={{fontSize:11, color:G.mid, marginTop:8}}>Scale: 7 = Exalted · 6 = Own Sign · 3 = Neutral · 1 = Debilitated</p>
+        <p style={{fontSize:12, color:G.mid, marginTop:8}}>Scale: 7 = Exalted · 6 = Own Sign · 3 = Neutral · 1 = Debilitated</p>
       </div>
       <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(160px, 1fr))', gap:10}}>
         {barData.map((d, i) => (
@@ -1186,7 +1189,7 @@ function TabPlanetary({ chart, mode }) {
             </div>
             <div style={{fontSize:12, color:G.good, marginBottom:4}}>● {d.label}</div>
             <div style={{fontSize:12, color:G.mid}}>{SIGN_SYM[d.p.siderealIdx]} {d.p.sign}</div>
-            <div style={{fontSize:11, color:G.mid, marginTop:4}}>H{d.p.house} {mode==='vedic'?`· ${d.p.nakshatra}`:''}</div>
+            <div style={{fontSize:12, color:G.mid, marginTop:4}}>H{d.p.house} {mode==='vedic'?`· ${d.p.nakshatra}`:''}</div>
             <div style={{marginTop:8, background:'rgba(212,175,55,0.08)', borderRadius:4, height:4}}>
               <div style={{width:`${(d.score/7)*100}%`, height:'100%', background:d.col, borderRadius:4}} />
             </div>
@@ -1228,9 +1231,9 @@ function TabForecast({ chart }) {
             <div key={i} style={{display:'flex', alignItems:'center', gap:12, padding:'8px 0', borderBottom:`1px solid ${G.bdr}`, opacity: isActive?1:0.65}}>
               <div style={{width:8, height:8, borderRadius:'50%', flexShrink:0, background:d.color, boxShadow: isActive?`0 0 8px ${d.color}`:''}} />
               <div style={{flex:1, fontSize:13, color: isActive?G.text:G.mid, fontWeight:isActive?'bold':'normal'}}>{d.planet}</div>
-              {dLord && <div style={{fontSize:11, color:G.mid}}>{dLord.sign} H{dLord.house}</div>}
-              <div style={{fontSize:11, color:G.mid}}>{jdToDate(d.startJD)}</div>
-              {isActive && <span style={{fontSize:9, color:d.color, background:`rgba(${hexToRgb(d.color)},0.1)`, padding:'2px 8px', borderRadius:20, fontWeight:'bold'}}>NOW</span>}
+              {dLord && <div style={{fontSize:12, color:G.mid}}>{dLord.sign} H{dLord.house}</div>}
+              <div style={{fontSize:12, color:G.mid}}>{jdToDate(d.startJD)}</div>
+              {isActive && <span style={{fontSize:11, color:d.color, background:`rgba(${hexToRgb(d.color)},0.1)`, padding:'2px 8px', borderRadius:20, fontWeight:'bold'}}>NOW</span>}
             </div>
           );
         })}
@@ -1317,7 +1320,7 @@ function TabLiveSky({ chart }) {
       <div style={{background:G.ink,border:`1px solid ${G.gold}33`,borderRadius:12,overflow:'hidden',marginBottom:20}}>
         <div style={{background:`${G.gold}10`,borderBottom:`1px solid ${G.gold}22`,padding:'12px 16px',color:G.gold,fontSize:13,fontFamily:'Georgia,serif',letterSpacing:1.5,textTransform:'uppercase'}}>✦ Cosmic Action Guide</div>
         <div style={{padding:'14px 16px',borderBottom:`1px solid ${G.bdr}`}}>
-          <div style={{color:G.good,fontSize:11,letterSpacing:1.2,textTransform:'uppercase',marginBottom:10}}>Move On · Lean In · Act</div>
+          <div style={{color:G.good,fontSize:12,letterSpacing:1.2,textTransform:'uppercase',marginBottom:10}}>Move On · Lean In · Act</div>
           {moveOn.length === 0 ? <div style={{color:G.mid,fontSize:12}}>Review and consolidate.</div> : moveOn.map((t,i)=>(
             <div key={i} style={{display:'flex',gap:10,marginBottom:12,paddingBottom:12,borderBottom:i<moveOn.length-1?`1px solid ${G.dim}22`:'none'}}>
               <span style={{color:t.col,fontSize:16}}>{t.sym}</span>
@@ -1329,7 +1332,7 @@ function TabLiveSky({ chart }) {
           ))}
         </div>
         <div style={{padding:'14px 16px'}}>
-          <div style={{color:G.warn,fontSize:11,letterSpacing:1.2,textTransform:'uppercase',marginBottom:10}}>Caution · Watch · Pause</div>
+          <div style={{color:G.warn,fontSize:12,letterSpacing:1.2,textTransform:'uppercase',marginBottom:10}}>Caution · Watch · Pause</div>
           {caution.length === 0 ? <div style={{color:G.mid,fontSize:12}}>No major caution transits.</div> : caution.map((t,i)=>(
             <div key={i} style={{display:'flex',gap:10,marginBottom:12,paddingBottom:12,borderBottom:i<caution.length-1?`1px solid ${G.dim}22`:'none'}}>
               <span style={{color:t.col,fontSize:16}}>{t.sym}</span>
@@ -1350,7 +1353,7 @@ function TabLiveSky({ chart }) {
             <span style={{color:G.text,fontWeight:'bold',fontSize:14,fontFamily:'Georgia,serif'}}>{t.name}</span>
             <span style={{color:t.col,fontSize:12,fontFamily:'monospace'}}>{t.sign} {t.deg}°</span>
             {t.retro && <Tag col="#FF9966">℞</Tag>}
-            <span style={{marginLeft:'auto',background:`${t.col}18`,border:`1px solid ${t.col}33`,borderRadius:6,padding:'2px 8px',fontSize:11,color:t.col}}>H{t.h}</span>
+            <span style={{marginLeft:'auto',background:`${t.col}18`,border:`1px solid ${t.col}33`,borderRadius:6,padding:'2px 8px',fontSize:12,color:t.col}}>H{t.h}</span>
           </div>
           <div style={{color:G.mid,fontSize:12.5,lineHeight:1.7}}>{t.now}</div>
         </div>
@@ -1415,20 +1418,20 @@ function TabAskChart({ chart }) {
   return (
     <div>
       <div style={{ background: `${G.gold}08`, border: `1px solid ${G.gold}22`, borderRadius: 12, padding: '12px 16px', marginBottom: 16 }}>
-        <div style={{ color: G.gold, fontSize: 13, fontFamily: 'Georgia,serif', letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 3 }}>✦ Ask Your Chart</div>
-        <div style={{ color: G.mid, fontSize: 12 }}>
+        <div style={{ color: G.gold, fontSize: 15, fontFamily: 'Georgia,serif', letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 3 }}>✦ Ask Your Chart</div>
+        <div style={{ color: G.mid, fontSize: 14 }}>
           Ask anything — a dream, a feeling, a symbol, a decision. Every answer is grounded in your specific natal placements and active dasha.
         </div>
       </div>
 
       {msgs.length === 0 && (
         <div style={{ marginBottom: 16 }}>
-          <div style={{ color: G.dim, fontSize: 11, letterSpacing: 1, textTransform: 'uppercase', marginBottom: 8 }}>Try asking</div>
+          <div style={{ color: G.dim, fontSize: 12, letterSpacing: 1, textTransform: 'uppercase', marginBottom: 8 }}>Try asking</div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7 }}>
             {SUGGESTIONS.map((s, i) => (
               <button key={i} onClick={() => send(s)} style={{
                 background: `${G.gold}10`, border: `1px solid ${G.gold}30`,
-                borderRadius: 8, padding: '6px 11px', fontSize: 11.5,
+                borderRadius: 8, padding: '6px 11px', fontSize: 15,
                 color: G.goldL, cursor: 'pointer', textAlign: 'left',
                 transition: 'all .2s', fontFamily: 'Georgia,serif',
               }}>{s}</button>
@@ -1442,14 +1445,14 @@ function TabAskChart({ chart }) {
           <div key={i} style={{ display: 'flex', justifyContent: m.role === 'user' ? 'flex-end' : 'flex-start', marginBottom: 12 }}>
             <div style={{
               maxWidth: '85%',
-              background: m.role === 'user' ? `${G.gold}18` : G.ink,
+              background: m.role === 'user' ? `${G.gold}18` : 'rgb(16, 35, 90)',
               border: `1px solid ${m.role === 'user' ? G.gold + '33' : G.bdr}`,
               borderRadius: m.role === 'user' ? '12px 12px 2px 12px' : '12px 12px 12px 2px',
-              padding: '12px 15px', fontSize: 13, lineHeight: 1.8,
+              padding: '12px 15px', fontSize: 15, lineHeight: 1.8,
               color: m.role === 'user' ? G.goldL : G.text, whiteSpace: 'pre-wrap',
             }}>
               {m.role === 'assistant' && (
-                <div style={{ color: G.gold, fontSize: 10, letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 6, fontFamily: 'Georgia,serif' }}>✦ Your Chart Says</div>
+                <div style={{ color: G.gold, fontSize: 11, letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 6, fontFamily: 'Georgia,serif' }}>✦ Your Chart Says</div>
               )}
               {m.content}
             </div>
@@ -1458,7 +1461,7 @@ function TabAskChart({ chart }) {
         {loading && (
           <div style={{ display: 'flex', justifyContent: 'flex-start', marginBottom: 12 }}>
             <div style={{ background: G.ink, border: `1px solid ${G.bdr}`, borderRadius: '12px 12px 12px 2px', padding: '12px 15px' }}>
-              <div style={{ color: G.mid, fontSize: 12 }}>Reading your chart</div>
+              <div style={{ color: G.mid, fontSize: 14 }}>Reading your chart</div>
               <div style={{ display: 'flex', gap: 4, marginTop: 6 }}>
                 {[0, 1, 2].map(j => (
                   <div key={j} style={{ width: 6, height: 6, borderRadius: '50%', background: G.gold, opacity: 0.6, animation: `twinkle .8s ${j * 0.2}s infinite alternate` }} />
@@ -1477,17 +1480,17 @@ function TabAskChart({ chart }) {
           onKeyDown={e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } }}
           placeholder="Ask about a dream, a symbol, a feeling, a decision..."
           rows={2}
-          style={{ flex: 1, background: 'transparent', border: 'none', outline: 'none', color: G.text, fontSize: 13, fontFamily: 'Georgia,serif', resize: 'none', lineHeight: 1.6 }}
+          style={{ flex: 1, background: 'transparent', border: 'none', outline: 'none', color: G.text, fontSize: 15, fontFamily: 'Georgia,serif', resize: 'none', lineHeight: 1.6 }}
         />
         <button onClick={() => send()} disabled={!input.trim() || loading} style={{
           background: (!input.trim() || loading) ? `${G.gold}22` : `${G.gold}33`,
           border: `1px solid ${G.gold}55`, borderRadius: 8,
           padding: '8px 14px', color: G.gold,
           cursor: (!input.trim() || loading) ? 'default' : 'pointer',
-          fontSize: 13, fontFamily: 'Georgia,serif', transition: 'all .2s', flexShrink: 0,
+          fontSize: 15, fontFamily: 'Georgia,serif', transition: 'all .2s', flexShrink: 0,
         }}>Ask ✦</button>
       </div>
-      <div style={{ color: G.dim, fontSize: 10, marginTop: 6, textAlign: 'center' }}>
+      <div style={{ color: G.dim, fontSize: 11, marginTop: 6, textAlign: 'center' }}>
         Enter to send · Shift+Enter for new line · Powered by Gemini AI using your full natal chart
       </div>
     </div>
